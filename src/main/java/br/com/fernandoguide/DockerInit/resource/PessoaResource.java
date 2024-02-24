@@ -1,19 +1,22 @@
 package br.com.fernandoguide.DockerInit.resource;
 
 import br.com.fernandoguide.DockerInit.entity.Pessoa;
+import br.com.fernandoguide.DockerInit.repository.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class PessoaResource {
 
+    @Autowired
+    private PessoaRepository repository;
+
     @GetMapping("/pessoa")
-    public List<Pessoa> getAllPessoa(){
-        return List.of(new Pessoa(1L,"Fernando","123456","fernando@gmail.com"),
-                new Pessoa(2L,"Rodrigo","54354354","rodrigo@gmail.com"),
-                new Pessoa(3L,"Lucas","5345345346","lucas@gmail.com"),
-                new Pessoa(4L,"Marcos","645345345","marcos@gmail.com"));
+    public List<Pessoa> getAllPessoa() {
+        return repository.findAll();
     }
 }
